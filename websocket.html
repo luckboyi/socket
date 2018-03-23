@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>websocket demo</title>
+</head>
+<body>
+    <div id="connected"></div>
+    <script>
+        var onOpen = function(){
+            console.log('Socket opened')
+            socket.send('hi,server')
+        },
+        onClose = function(){
+            console.log('socket closed')
+        },
+        onMessage = function(data){
+            console.log('we get signal')
+            console.log(data.data)
+            document.getElementById('connected').innerHTML =data.data
+            console.log(111)            
+        },
+        onError = function () {
+            console.log('error')
+        },
+        socket = new WebSocket('ws://127.0.0.1:8877/');
+        socket.onopen = onOpen
+        socket.onclose = onClose
+        socket.onmessage = onMessage
+        socket.onerror = onError
+    </script>
+</body>
+</html>
